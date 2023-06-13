@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jogo de Perguntas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+    }
+
+    p {
+      color: #777;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .incorrect {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Seja bem-vinda, Maria Luiza, ao meu jogo de perguntas 🎮</h1>
+  
+  <div class="question">
+    <label for="respostaInicial">Deseja jogar?</label>
+    <input type="checkbox" id="respostaInicial" name="respostaInicial">
+    <br><br>
+    <button onclick="jogar()">Iniciar</button>
+  </div>
+
+  <div id="perguntas" style="display: none;"></div>
+
+  <script>
+    function fazerPergunta(pergunta, respostaCorreta) {
+      var resposta = prompt(pergunta);
+
+      if (resposta !== null) {
+        resposta = resposta.trim();
+      }
+
+      var divPerguntas = document.getElementById("perguntas");
+      var p = document.createElement("p");
+
+      if (resposta === respostaCorreta) {
+        p.className = "correct";
+        p.textContent = "✅ Resposta correta!";
+      } else {
+        p.className = "incorrect";
+        p.textContent = "❌ Resposta incorreta!";
+        var pRespostaCorreta = document.createElement("p");
+        pRespostaCorreta.className = "correct";
+        pRespostaCorreta.textContent = "Resposta correta: " + respostaCorreta;
+        divPerguntas.appendChild(pRespostaCorreta);
+      }
+
+      divPerguntas.appendChild(p);
+      divPerguntas.appendChild(document.createElement("br"));
+    }
+
+    function jogar() {
+      var respostaInicial = document.getElementById("respostaInicial").checked;
+
+      if (respostaInicial) {
+        document.getElementById("perguntas").style.display = "block";
+
+        fazerPergunta("Qual o papel do personagem Tony Stark na Marvel?", "Homem de Ferro");
+        fazerPergunta("Qual o papel do personagem Steve Rogers na Marvel?", "Capitão América");
+        fazerPergunta("Qual o papel do personagem Natasha Romanoff na Marvel?", "Viúva Negra");
+        fazerPergunta("Qual o papel do personagem Thor Odinson na Marvel?", "Thor");
+        // Adicione mais perguntas aqui
+      } else {
+        var divPerguntas = document.getElementById("perguntas");
+        var p = document.createElement("p");
+        p.textContent = "Obrigado por visitar! Até mais!";
+        divPerguntas.appendChild(p);
+      }
+    }
+  </script>
+</body>
+</html>
